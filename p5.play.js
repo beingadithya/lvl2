@@ -3230,12 +3230,12 @@ function Sprite(pInst, _x, _y, _w, _h) {
       // If the quadtree is disabled -or- no sprites in this group are in the
       // quadtree yet (because their default colliders haven't been created)
       // we should just check all of them.
-      if (others.length === 0) {
-        others = target;
-      }
-    } else {
-      throw('Error: overlap can only be checked between sprites or groups');
-    }
+      //if (others.length === 0) {
+       // others = target;
+     // }
+    } //else {
+      //throw('Error: overlap can only be checked between sprites or groups');
+    //}
 
     var result = false;
     for(var i = 0; i < others.length; i++) {
