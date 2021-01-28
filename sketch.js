@@ -77,7 +77,7 @@ function preload(){
   marineNinja_img = loadImage('images/MARINENINJALOGO.png');
 
   howToPlay_img = loadImage('images/HOWTOPLAYLVL1FINAL.png');
-  instructions_img = loadImage('images/INSTRUCTIONSFORLVL2.png');
+  instructions_img = loadImage('images/Level2Instructions.png');
 
   diver_img = loadAnimation('images/diverImg1.png','images/diverImg2.png','images/DiverImg3.png','images/DiverImg4.png','images/DiverImg5.png','images/DiverImg6.png','images/DiverImg7.png','images/DiverImg8.png')
   staticDiver_img = loadImage('images/DiverImg4.png');
@@ -102,7 +102,7 @@ function preload(){
   angelFish_img = loadImage('images/angelfish.png');
 
   winText_img = loadImage('images/setFinal.png');
-  loseText_img = loadImage('images/RELOAD.png');
+  loseText_img = loadImage('images/Level2Win.png');
 
   tempbg = loadImage('images/IntroBackgroundTemp.jpg');
 
@@ -114,9 +114,9 @@ function preload(){
 
   net_img = loadImage('images/FISHNET.png');
 
-  bag_img = loadImage('images/Bag.jpg');
-  can_img = loadImage('images/Can.jpg');
-  cupWithStraw_img  = loadImage('images/cupWithstraw.jpg'); 
+  bag_img = loadImage('images/Bag_latest.png');
+  can_img = loadImage('images/Can_latest.png');
+  cupWithStraw_img  = loadImage('images/cupWithstraw_latest.png'); 
 
 }
 function setup() {
@@ -381,7 +381,7 @@ function draw(){
        turtle1.velocityY = -3;
       
     }    
-    if(turtlesSaved === 1 && frameCount % 250 === 0){
+    if(turtlesSaved === 1 && frameCount % 500 === 0){
       turtlesSaved = 0;
       net.x = 1065;
       net.y = 0;
@@ -402,7 +402,7 @@ function draw(){
    }
 if(gameState === "WIN"){
   button = createButton('LEVEL 2');
-  button.position(300,300);
+  button.position(852,497);
   button.mousePressed(greet);
   
   plasticWasteGroup.destroyEach();
@@ -469,28 +469,28 @@ function spawnPlasticWaste(){
     var plasticwaste = createSprite(random(320,520), random(-5,-15));
     switch(rand){
       case 1: plasticwaste.addImage(plasticBags_img);
-     plasticwaste.scale = 0.03
+     plasticwaste.scale = 0.03;
       break;
 
       case 2: plasticwaste.addImage(plasticBottles_img);
-      plasticwaste.scale = 0.1
+      plasticwaste.scale = 0.1;
       break;
-/*
+
       case 3: plasticwaste.addImage(can_img);
-      can_img.scale = 0.01;
+     // plasticwaste.scale = 0.01;
       break;
 
       case 4: plasticwaste.addImage(bag_img);
-      bag_img.scale = 0.01;
+     // plasticwaste.scale = 0.01;
       break;
 
       case 5: plasticwaste.addImage(cupWithStraw_img);
-      cupWithStraw_img.scale = 0.01;
+     // plasticwaste.scale = 0.5;
       break;
 
       default:
         break;
-        */
+        
       
     }
     plasticWasteGroup.add(plasticwaste);
@@ -502,23 +502,23 @@ function spawnPlasticWaste(){
     var plasticwaste = createSprite(random(320,480), random(-5,-15));
     switch(rand){
       case 1: plasticwaste.addImage(plasticBags_img);
-     plasticwaste.scale = 0.03
+     plasticwaste.scale = 0.03;
       break;
 
       case 2: plasticwaste.addImage(plasticBottles_img);
-      plasticwaste.scale = 0.1
+      plasticwaste.scale = 0.1;
       break;
       
       case 3: plasticwaste.addImage(can_img);
-      can_img.scale = 0.5;
+     // plasticwaste.scale = 0.5;
       break;
 
       case 4: plasticwaste.addImage(bag_img);
-      bag_img.scale = 0.5;
+     // plasticwaste.scale = 0.5;
       break;
 
       case 5: plasticwaste.addImage(cupWithStraw_img);
-      cupWithStraw_img.scale = 0.5;
+     // plasticwaste.scale = 0.5;
       break;
 
 
@@ -535,23 +535,23 @@ function spawnPlasticWaste(){
     var plasticwaste = createSprite(random(480,640), random(-5,-15));
     switch(rand){
       case 1: plasticwaste.addImage(plasticBags_img);
-     plasticwaste.scale = 0.03
+     plasticwaste.scale = 0.03;
       break;
 
       case 2: plasticwaste.addImage(plasticBottles_img);
-      plasticwaste.scale = 0.1
+      plasticwaste.scale = 0.1;
       break;
 
       case 3: plasticwaste.addImage(can_img);
-      can_img.scale = 0.5;
+     // plasticwaste.scale = 0.5;
       break;
 
       case 4: plasticwaste.addImage(bag_img);
-      bag_img.scale = 0.5;
+     // plasticwaste.scale = 0.5;
       break;
 
       case 5: plasticwaste.addImage(cupWithStraw_img);
-      cupWithStraw_img.scale = 0.5;
+     // plasticwaste.scale = 0.5;
       break;
 
       default:
@@ -567,23 +567,23 @@ function spawnPlasticWaste(){
     var plasticwaste = createSprite(random(680,800), random(-5,-15));
     switch(rand){
       case 1: plasticwaste.addImage(plasticBags_img);
-     plasticwaste.scale = 0.03
+     plasticwaste.scale = 0.03;
       break;
 
       case 2: plasticwaste.addImage(plasticBottles_img);
-      plasticwaste.scale = 0.1
+      plasticwaste.scale = 0.1;
       break;
       
       case 3: plasticwaste.addImage(can_img);
-      can_img.scale = 0.5;
+     // plasticwaste.scale = 0.5;
       break;
 
       case 4: plasticwaste.addImage(bag_img);
-      bag_img.scale = 0.5;
+     // plasticwaste.scale = 0.5;
       break;
 
       case 5: plasticwaste.addImage(cupWithStraw_img);
-      cupWithStraw_img.scale = 0.5;
+     // plasticwaste.scale = 0.5;
       break;
 
       default:
@@ -636,5 +636,5 @@ var fish = createSprite(random(1830,1700),random(100,450));
 }
 
 function greet() {
-  window.location.href = 'https://editor.p5js.org/ParnaMehta/present/kIA0MkLuu';
+  window.location.href = 'https://theinevitable007.github.io/level3/';
 }
