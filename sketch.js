@@ -62,6 +62,16 @@ var can_img;
 var bag_img;
 var cupWithStraw_img;
 
+var MarineNinja, MarineNinjaLogo_img;
+
+var LoseSound;
+
+var PlayAgain, PlayAgain_img;
+
+var gg = 0;
+
+var Level3Btn, Level3Btn_img;
+
 function preload(){
   bg = loadImage('images/THEFINALIMGBG.png');
 
@@ -76,8 +86,8 @@ function preload(){
 
   marineNinja_img = loadImage('images/MARINENINJALOGO.png');
 
-  howToPlay_img = loadImage('images/HOWTOPLAYLVL1FINAL.png');
-  instructions_img = loadImage('images/Level2Instructions.png');
+  howToPlay_img = loadImage('images/HowToplayTitle.png');
+  instructions_img = loadImage('images/Level2InstructionsTest.png');
 
   diver_img = loadAnimation('images/diverImg1.png','images/diverImg2.png','images/DiverImg3.png','images/DiverImg4.png','images/DiverImg5.png','images/DiverImg6.png','images/DiverImg7.png','images/DiverImg8.png')
   staticDiver_img = loadImage('images/DiverImg4.png');
@@ -85,11 +95,11 @@ function preload(){
   flippedDiver_img = loadAnimation('images/flippedDiver1.png','images/flippedDiver2.png','images/flippedDiver3.png','images/flippedDiver4.png','images/flippedDiver5.png','images/flippedDiver6.png','images/flippedDiver7.png','images/flippedDiver8.png');
   flippedDiverStatic = loadImage('images/flippedDiver1.png');
 
-  life1_img = loadImage('images/fish1.png');
-  life2_img = loadImage('images/fish2.png');
-  life3_img = loadImage('images/fish3.png');
-  life4_img = loadImage('images/fish4.png');
-  life5_img = loadImage('images/fish5.png');
+  life1_img = loadImage('images/LifeLine.png');
+  life2_img = loadImage('images/LifeLine.png');
+  life3_img = loadImage('images/LifeLine.png');
+  life4_img = loadImage('images/LifeLine.png');
+  life5_img = loadImage('images/LifeLine.png');
 
   bomb_img = loadImage('images/bomb.png'); 
   bombSound = loadSound('Sounds/Bomb.wav');
@@ -97,17 +107,18 @@ function preload(){
   octopus_img = loadImage('images/Octopus.png');
   nemo_img = loadImage('images/clownfish.png');
 
-  playButton_img = loadImage('images/PlayButtonFinal.png');
+  playButton_img = loadImage('images/PlayButton.png');
 
   angelFish_img = loadImage('images/angelfish.png');
 
-  winText_img = loadImage('images/setFinal.png');
-  loseText_img = loadImage('images/Level2Win.png');
+  winText_img = loadImage('images/level_3-removebg-preview.png');
+  loseText_img = loadImage('images/Level2Lose.png');
 
-  tempbg = loadImage('images/IntroBackgroundTemp.jpg');
+  tempbg = loadImage('images/haha.jpg');
 
   gameSound = loadSound('Sounds/gameSoundTrial.mp3');
   winSound = loadSound('Sounds/Win.mp3');
+  LoseSound = loadSound('Sounds/Fail.mp3')
 
   turtle1_img = loadImage('images/turtleMain.png');
   //turtle2_img = loadImage('images/turtle2.png');
@@ -117,6 +128,11 @@ function preload(){
   bag_img = loadImage('images/Bag_latest.png');
   can_img = loadImage('images/Can_latest.png');
   cupWithStraw_img  = loadImage('images/cupWithstraw_latest.png'); 
+
+  MarineNinjaLogo_img = loadImage('images/Logo.png');
+  PlayAgain_img = loadImage('images/PlayAgainBtn.png');
+
+  Level3Btn_img = loadImage('images/Level3btn.png');
 
 }
 function setup() {
@@ -130,26 +146,31 @@ function setup() {
    octopus.scale = 0.5;
    octopus.visible = false; 
   
+//diver = createSprite(80,150);
+diver = createSprite(0.1*windowWidth,0.2*windowHeight);
+diver.addAnimation("diversfirstimg",staticDiver_img);
+diver.scale = 0.25;
 
-   diver = createSprite(80,150);
-   diver.addAnimation("diversfirstimg",staticDiver_img);
-   diver.scale = 0.35;
+//life1 = createSprite(1105,50);
+life1 = createSprite(0.95*windowWidth,0.06*windowHeight);
+life1.addImage(life1_img);
+life1.scale = 0.5;
 
-   life1 = createSprite(1105,50);
-   life1.addImage(life1_img);
-   life1.scale = 0.5;
+//life2 = createSprite(1040,50);
+life2 = createSprite(0.95*windowWidth,0.16*windowHeight)
+life2.addImage(life2_img);
+life2.scale = 0.5;
 
-   life2 = createSprite(1040,50);
-   life2.addImage(life2_img);
-   life2.scale = 0.5;
 
-   life3 = createSprite(975,50);
-   life3.addImage(life3_img);
-   life3.scale = 0.5;
+//life3 = createSprite(975,50);
+life3 = createSprite(0.95*windowWidth,0.26*windowHeight)
+life3.addImage(life3_img);
+life3.scale = 0.5;
 
-   life4 = createSprite(910,50);
-   life4.addImage(life4_img);
-   life4.scale =0.5;
+//life4 = createSprite(910,50);
+life4 = createSprite(0.95*windowWidth,0.36*windowHeight)
+life4.addImage(life4_img);
+life4.scale =0.5;
 
    //life5 = createSprite(845,50);
    //life5.addImage(life5_img)
@@ -169,49 +190,57 @@ function setup() {
   //introBg.scale = 0.075
   introBg.visible = false;
 
-  marineNinja = createSprite(950,370);
+  //marineNinja = createSprite(950,370);
+  marineNinja = createSprite(0.5*windowWidth,0.4*windowHeight);
   marineNinja.addImage(marineNinja_img);
-  marineNinja.scale = 0.75;
+  marineNinja.scale = 0.5;
   marineNinja.visible = false;
 
-  howToPlay = createSprite(1000,160);
+  howToPlay = createSprite(windowWidth/2,100);
   howToPlay.addImage(howToPlay_img);
-  howToPlay.scale = 0.75;
+  howToPlay.scale = 0.85;
   howToPlay.visible = false;
 
-  instructions = createSprite(1400,350);
+  //instructions = createSprite(1400,350);
+  instructions = createSprite(windowWidth/2, 500);
   instructions.addImage(instructions_img);
-  instructions.scale = 0.75;
+  instructions.scale = 1.25;
   instructions.visible = false;
 
-  playButton = createSprite(700,350);
+  playButton = createSprite(0.2*windowWidth, windowHeight/2);//else x = 200;
   playButton.addImage(playButton_img);
-  playButton.scale = 0.35;
+  playButton.scale = 0.75;
   playButton.visible = false;   
   
-  BookInstructionButton = createSprite(1400,350);
+ // BookInstructionButton = createSprite(1400,350);
+  BookInstructionButton = createSprite(0.7*windowWidth,0.35*windowHeight);
   BookInstructionButton.addImage(BookInstructionButton_img);
-  BookInstructionButton.scale = 0.25;
+  BookInstructionButton.scale = 0.5;
   BookInstructionButton.visible = false;
   
-  //playText = createSprite(660,415);
-  //playText.addImage(playText_img);
-  //playText.scale = 0.5;
-  //playText.visible = false;
+  MarineNinjaLogo = createSprite(0.07*windowWidth,0.115*windowHeight);
+  MarineNinjaLogo.addImage(MarineNinjaLogo_img);
+  MarineNinjaLogo.scale = 0.17;
 
-  score = createSprite(150,100);
+
+  PlayAgain = createSprite(1545,438);
+  PlayAgain.addImage(PlayAgain_img);
+  PlayAgain.scale = 0.75;
+  PlayAgain.visible = false;
+
+  score = createSprite(0.09*windowWidth,0.11*windowHeight);
   score.addImage(score_img);
   score.scale = 0.5;
   score.visible = false;
 
-  winText = createSprite(windowWidth/2, windowHeight/2);
+  winText = createSprite(windowWidth/2.2, 345);
   winText.addImage(winText_img);
-  winText.scale = 0.55;
+  winText.scale = 1.20;
   winText.visible = false;
    
   loseText = createSprite(windowWidth/2, windowHeight/2);
   loseText.addImage(loseText_img);
-  loseText.scale = 0.55;
+  loseText.scale = 1.5;
   loseText.visible = false;
 
   turtle1 = createSprite(1756,414);
@@ -232,6 +261,11 @@ function setup() {
   gameSound.loop();
   gameSound.play();
 
+  Level3Btn = createSprite(1403,354);
+  Level3Btn.addImage(Level3Btn_img);
+  Level3Btn.scale = 1.3
+  Level3Btn.visible = false;
+
 }
 
 function draw(){
@@ -241,9 +275,10 @@ function draw(){
   background(tempbg);
 
   if(gameState === "play"){
-
-    
-  
+    //gameState = "END";
+    MarineNinjaLogo.x = 0.915*windowWidth;
+    MarineNinjaLogo.y = windowHeight/1.25;   
+      
   if(frameCount > 100){
     spawnPlasticWaste();
     spawnFish();
@@ -260,7 +295,7 @@ function draw(){
 
    if(keyWentDown(RIGHT_ARROW)){
      diver.changeAnimation("diverMoving",diver_img);
-     diver.velocityX = 4;
+     diver.velocityX = 7;
    }
    if(keyWentUp(RIGHT_ARROW)){
      diver.changeAnimation("diversfirstimg",staticDiver_img);
@@ -284,7 +319,7 @@ function draw(){
   }
   if(keyWentDown(LEFT_ARROW)){
     diver.changeAnimation("flippedDiver",flippedDiver_img);   
-    diver.velocityX = -4
+    diver.velocityX = -7
   }
   if(keyWentUp(LEFT_ARROW)){
     diver.changeAnimation("flippedDiverInStatic",flippedDiverStatic);
@@ -292,25 +327,31 @@ function draw(){
   }
   
 
-   if(count === 3){
+   if(count >= 3){
      life1.destroy();
    }
-    if(count === 6){
+    if(count >= 6 && life1.destroy()){
      life2.destroy();
    }
-    if(count === 9){
+    if(count >= 9 && life2.destroy()){
      life3.destroy();
    }
-    if(count === 12){
-     life4.destroy();
-
+    if(count >= 19){
+     gameState = "END";
      plasticWasteGroup.destroyEach();
      fishGroup.destroyEach();
      diver.visible = false;
+     turtle1.visible = false;
+
+   
+
+     life1.visible = false;
+     life2.visible = false;
+     life3.visible = false;
+     life4.visible = false;
 
      loseText.visible = true;
-   }
-   
+   }   
    
   }//gameState play ends here
   
@@ -401,10 +442,13 @@ function draw(){
     gameState = "WIN";
    }
 if(gameState === "WIN"){
-  button = createButton('LEVEL 2');
-  button.position(852,497);
-  button.mousePressed(greet);
-  
+ // button = createButton('LEVEL 2');
+ // button.position(852,497);
+// button.mousePressed(greet);
+text(scoreText,217,80);
+Level3Btn.visible = true;
+turtle1.visible = false;
+net.visible = false;
   plasticWasteGroup.destroyEach();
   fishGroup.destroyEach();
   diver.visible = false;
@@ -413,12 +457,23 @@ if(gameState === "WIN"){
   //gameSound.pause();
 
 }
+
 //lose
 if(gameState === "END"){
+  net.visible = false;
+  PlayAgain.visible = true;
+
+  MarineNinjaLogo.x = 112;
+  MarineNinjaLogo.y = 115;
+
   plasticWasteGroup.destroyEach();
   fishGroup.destroyEach();
   diver.visible = false;
   score.visible = false;
+
+  //LoseSound.play();
+
+  //noLoop();
 }
 
 
@@ -455,8 +510,8 @@ if(gameState === "END"){
     
       
     }
-    fill("white");
-    text(mouseX + ":" + mouseY, 600,150);
+   // fill("white");
+    //text(mouseX + ":" + mouseY, 600,150);
     drawSprites();
 
     
@@ -464,138 +519,118 @@ if(gameState === "END"){
   
 //spawning plastics
 function spawnPlasticWaste(){
-  if(frameCount % 50 === 0 && diver.x <= 160){
-    var rand = Math.round(random(1,2));
-    var plasticwaste = createSprite(random(320,520), random(-5,-15));
-    switch(rand){
-      case 1: plasticwaste.addImage(plasticBags_img);
-     plasticwaste.scale = 0.03;
-      break;
-
-      case 2: plasticwaste.addImage(plasticBottles_img);
-      plasticwaste.scale = 0.1;
-      break;
-
-      case 3: plasticwaste.addImage(can_img);
-     // plasticwaste.scale = 0.01;
-      break;
-
-      case 4: plasticwaste.addImage(bag_img);
-     // plasticwaste.scale = 0.01;
-      break;
-
-      case 5: plasticwaste.addImage(cupWithStraw_img);
-     // plasticwaste.scale = 0.5;
-      break;
-
-      default:
+  /*
+    if(frameCount % 50 === 0 && diver.x <= 160){
+      var rand = Math.round(random(1,2));
+      //var plasticwaste = createSprite(random(320,520), random(-5,-15));
+      var plasticwaste = createSprite(random(0.2*windowWidth, 0.9*windowWidth), random(-5,-15));
+  
+      switch(rand){
+        case 1: plasticwaste.addImage(plasticBags_img);
+       plasticwaste.scale = 0.03
         break;
+  
+        case 2: plasticwaste.addImage(plasticBottles_img);
+        plasticwaste.scale = 0.1
+        break;
+  
+        default:
+          break;
         
-      
+      }
+      plasticWasteGroup.add(plasticwaste);
+      plasticwaste.velocityY = 1 + scoreText/25; 
     }
-    plasticWasteGroup.add(plasticwaste);
-    plasticwaste.velocityY = 1 + scoreText/25; 
-  }
-
-  if(frameCount % 40 === 0 && diver.x > 200 && diver.x < 320 ){
-    var rand = Math.round(random(1,6));
-    var plasticwaste = createSprite(random(320,480), random(-5,-15));
-    switch(rand){
-      case 1: plasticwaste.addImage(plasticBags_img);
-     plasticwaste.scale = 0.03;
-      break;
-
-      case 2: plasticwaste.addImage(plasticBottles_img);
-      plasticwaste.scale = 0.1;
-      break;
-      
-      case 3: plasticwaste.addImage(can_img);
-     // plasticwaste.scale = 0.5;
-      break;
-
-      case 4: plasticwaste.addImage(bag_img);
-     // plasticwaste.scale = 0.5;
-      break;
-
-      case 5: plasticwaste.addImage(cupWithStraw_img);
-     // plasticwaste.scale = 0.5;
-      break;
-
-
-      default:
-        break;
-      
-    }
-    plasticWasteGroup.add(plasticwaste);
-    plasticwaste.velocityY = 1 + scoreText/25; 
+    */
+  
+    if(frameCount % 10 === 0){
+      if(frameCount % 30 === 0){
+        var rand = Math.round(random(1,2));
+        //var plasticwaste = createSprite(random(320,520), random(-5,-15));
+        var plasticwaste = createSprite(random(0.2*windowWidth, 0.9*windowWidth), random(-5,-15));
     
-  }
-  if(frameCount % 40 === 0 && diver.x > 320 && diver.x < 480 ){
-    var rand = Math.round(random(1,6));
-    var plasticwaste = createSprite(random(480,640), random(-5,-15));
-    switch(rand){
-      case 1: plasticwaste.addImage(plasticBags_img);
-     plasticwaste.scale = 0.03;
-      break;
-
-      case 2: plasticwaste.addImage(plasticBottles_img);
-      plasticwaste.scale = 0.1;
-      break;
-
-      case 3: plasticwaste.addImage(can_img);
-     // plasticwaste.scale = 0.5;
-      break;
-
-      case 4: plasticwaste.addImage(bag_img);
-     // plasticwaste.scale = 0.5;
-      break;
-
-      case 5: plasticwaste.addImage(cupWithStraw_img);
-     // plasticwaste.scale = 0.5;
-      break;
-
-      default:
+        switch(rand){
+          case 1: plasticwaste.addImage(plasticBags_img);
+         plasticwaste.scale = 0.03
+          break;
+    
+          case 2: plasticwaste.addImage(plasticBottles_img);
+          plasticwaste.scale = 0.1
+          break;
+    
+          default:
+            break;
+          
+        }
+        plasticWasteGroup.add(plasticwaste);
+        plasticwaste.velocityY = 1 + scoreText/25; 
+      }
+    }
+      /*
+      var rand = Math.round(random(1,2));
+      //var plasticwaste = createSprite(random(320,480), random(-5,-15));
+      var plasticwaste = createSprite(random(0.4*windowWidth,0.9*windowWidth), random(-5,-15));
+  
+      switch(rand){
+        case 1: plasticwaste.addImage(plasticBags_img);
+       plasticwaste.scale = 0.03
         break;
+  
+        case 2: plasticwaste.addImage(plasticBottles_img);
+        plasticwaste.scale = 0.1
+        break;
+  
+        default:
+          break;
+        
+      }
+      plasticWasteGroup.add(plasticwaste);
+      plasticwaste.velocityY = 2 + scoreText/25; 
       
     }
-    plasticWasteGroup.add(plasticwaste);
-    plasticwaste.velocityY = 1 + scoreText/25; 
-    
-  }
-  if(frameCount % 40 === 0 && diver.x > 640 && diver.x < 800 ){
-    var rand = Math.round(random(1,6));
-    var plasticwaste = createSprite(random(680,800), random(-5,-15));
-    switch(rand){
-      case 1: plasticwaste.addImage(plasticBags_img);
-     plasticwaste.scale = 0.03;
-      break;
-
-      case 2: plasticwaste.addImage(plasticBottles_img);
-      plasticwaste.scale = 0.1;
-      break;
-      
-      case 3: plasticwaste.addImage(can_img);
-     // plasticwaste.scale = 0.5;
-      break;
-
-      case 4: plasticwaste.addImage(bag_img);
-     // plasticwaste.scale = 0.5;
-      break;
-
-      case 5: plasticwaste.addImage(cupWithStraw_img);
-     // plasticwaste.scale = 0.5;
-      break;
-
-      default:
+    if(frameCount % 40 === 0 && diver.x > 320 && diver.x < 480 ){
+      var rand = Math.round(random(1,2));
+      var plasticwaste = createSprite(random(0.5*windowWidth, 0.9*windowHeight), random(-5,-15));
+      switch(rand){
+        case 1: plasticwaste.addImage(plasticBags_img);
+       plasticwaste.scale = 0.03
         break;
+  
+        case 2: plasticwaste.addImage(plasticBottles_img);
+        plasticwaste.scale = 0.1
+        break;
+  
+        default:
+          break;
+        
+      }
+      plasticWasteGroup.add(plasticwaste);
+      plasticwaste.velocityY = 2 + scoreText/25; 
       
     }
-    plasticWasteGroup.add(plasticwaste);
-    plasticwaste.velocityY = 1 + scoreText/25; 
-    
+    if(frameCount % 40 === 0 && diver.x > 640 && diver.x < 800 ){
+      var rand = Math.round(random(1,2));
+      var plasticwaste = createSprite(random(0.3*windowWidth, 0.9*windowHeight), random(-5,-15));
+      switch(rand){
+        case 1: plasticwaste.addImage(plasticBags_img);
+       plasticwaste.scale = 0.03
+        break;
+  
+        case 2: plasticwaste.addImage(plasticBottles_img);
+        plasticwaste.scale = 0.1
+        break;
+  
+        default:
+          break;
+        
+      }
+      plasticWasteGroup.add(plasticwaste);
+      plasticwaste.velocityY = 2 + scoreText/25; 
+      
+    }
+    */
+  
   }
-
-}
 //spawning fish
 function spawnFish(){
 if(frameCount % 100 === 0){
@@ -620,15 +655,6 @@ var fish = createSprite(random(1830,1700),random(100,450));
   fishGroup.add(fish);
   }
  }
- //restart game
- function restart(){
-   if(keyCode === UP_ARROW){
-
-      gameState = "play";
-      diver.visible = true;
-      score.visible = true;
-   }
- }
 
  //resize  the window screen to match the different phone, tab or PC sizes...
  function windowResized() {
@@ -636,5 +662,10 @@ var fish = createSprite(random(1830,1700),random(100,450));
 }
 
 function greet() {
-  window.location.href = 'https://theinevitable007.github.io/level3/';
+  window.location.href = 'https://theinevitable007.github.io/Mn3/';
+}
+
+function retry() {
+  
+  document.location.reload(true);  
 }
