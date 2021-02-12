@@ -1,14 +1,50 @@
 <!DOCTYPE html><html><head>
-    <title>Marine Ninja Level 2</title>
     <script src="p5.js"></script>
     <script src="p5.dom.min.js"></script>
     <script src="p5.sound.min.js"></script>
-<script src="./p5.play.js"></script>
+<script src="p5.play.js"></script>
 <script sec="p5.sound.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
 
   </head>
   <body>
-      <script src="sketch.js"></script>
+    
+        <audio id="myAudio">
+            <source src="Sounds/Win.mp3" type="audio/mp3"> 
+            Your browser does not support the audio element.
+      </audio>
+
+      <audio id="myLoseAudio">
+        <source src="Sounds/Fail.mp3" type="audio/mp3"> 
+            Your browser does not support the audio element.
+      </audio>
+        <script src="sketch.js"></script>
+   
+     <script type="text/javascript">
+        var play = false;
+  console.log("PLAY STATE:"+play);
+        
+  
+  function playSound()
+  {
+      
+      if(play)
+       {
+           console.log(" IF CONDITION PLAY STATE:"+play);
+           var someSound = document.getElementById("myAudio"); 	
+           someSound.play();
+       
+       }
+  }
+
+  function playSoundWhenLost(){
+      if(play && gameState === 'END'){
+        var loseSound = document.getElementById("myLoseAudio"); 	
+           loseSound.play();
+      }
+  }
+   
+</script>
+    
 </body></html>
