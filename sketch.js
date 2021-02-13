@@ -270,8 +270,6 @@ life4.scale =0.5;
 
 function draw(){
 //  StartIntroSong();
-
-
   background(tempbg);
 
   if(gameState === "play"){
@@ -325,7 +323,6 @@ function draw(){
     diver.changeAnimation("flippedDiverInStatic",flippedDiverStatic);
     diver.velocityX = 0;
   }
-  
 
    if(count >= 3){
      life1.destroy();
@@ -437,7 +434,7 @@ function draw(){
    } 
    
    //win
-   if(scoreText === 500){
+   if(scoreText === 5){
     winText.visible = true;
     gameState = "WIN";
    }
